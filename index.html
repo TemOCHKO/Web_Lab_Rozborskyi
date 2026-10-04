@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachinder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- hat -->
+    <header>
+        <div class="top-header">
+            <h1 class="main-title">Teachinder</h1>
+            <input type="search" id="site-search" name="q" placeholder="Name, note or age to search"/>
+            <button>Search</button>
+        </div>
+        <div class="bottom-header">
+            <nav class="navig-links">
+                <a href="" class="accent-color">Teachers</a>
+                <a href="" class="accent-color">Statistics</a>
+                <a href="" class="accent-color">Favorites</a>
+                <a href="" class="accent-color">About</a>
+            </nav>
+
+            <button id="add-teacher-button" onclick="openPopup('addPopup')">Add Teacher</button>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <main>
+        <h2 class="secondary-header">Top Teachers</h2>
+
+        <div class="search-filters">
+            <label>Age<select><option>18-31</option><option>32-45</option></select></label>
+            <div class="vertical-divider-dots"></div>
+            <label>Region<select><option>Europe</option><option>Asia</option></select></label>
+            <div class="vertical-divider-dots"></div>
+            <label>Sex<select><option>Male</option><option>Female</option></select></label>
+            <div class="vertical-divider-dots"></div>
+            <label><input type="checkbox">Only with photo</label>
+            <div class="vertical-divider-dots"></div>
+            <label><input type="checkbox">Only favorites</label>
+        </div>
+            
+        <!-- Teacher grid -->
+        <div class="teacher-showcase">
+            <div class="teacher-card" onclick="openPopup('infoPopup')">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="Ihor" class="avatar">
+                </div>
+                <div class="teacher-name">Ihor<br>Tkachuk</div>
+                <div class="teacher-subject">Chemistry</div>
+                <div class="teacher-country">Ukraine</div>
+            </div>
+            <div class="teacher-card">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="Prague" class="avatar">
+                </div>
+                <div class="teacher-name">Prague<br>Rameshmabu</div>
+                <div class="teacher-subject">Chess</div>
+                <div class="teacher-country">India</div>
+            </div>
+            <div class="teacher-card">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="Floor" class="avatar">
+                </div>
+                <div class="teacher-name">Floor<br>Jansen</div>
+                <div class="teacher-subject">Vocal</div>
+                <div class="teacher-country">Denmark</div>
+            </div>
+            <div class="teacher-card">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="John" class="avatar">
+                </div>
+                <div class="teacher-name">John<br>Burke</div>
+                <div class="teacher-subject">Computer Science</div>
+                <div class="teacher-country">Belgium</div>
+            </div>
+            <div class="teacher-card">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="Ari" class="avatar">
+                </div>
+                <div class="teacher-name">Ari<br>Tang</div>
+                <div class="teacher-subject">Biology</div>
+                <div class="teacher-country">China</div>
+            </div>
+            <div class="teacher-card">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="Rachel" class="avatar">
+                </div>
+                <div class="teacher-name">Rachel<br>Andrew</div>
+                <div class="teacher-subject">Medicine</div>
+                <div class="teacher-country">Uk</div>
+            </div>
+            <div class="teacher-card">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="Anna" class="avatar">
+                </div>
+                <div class="teacher-name">Anna<br>Muzychyk</div>
+                <div class="teacher-subject">Chess</div>
+                <div class="teacher-country">Belarus</div>
+            </div>
+            <div class="teacher-card">
+                <div class="avatar-container">
+                    <img src="pfp.jpg" alt="Radoslav" class="avatar">
+                </div>
+                <div class="teacher-name">Radoslav<br>Ljuebovic</div>
+                <div class="teacher-subject">Physics</div>
+                <div class="teacher-country">Poland</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        <h2 class="secondary-header">Statistics</h2>
+        
+        <!-- Statistics grid -->
+        <div class="statistics">
+            <table>
+                <thead>
+
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <span class="active">1</span>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <span>...</span>
+            <a href="#">Last</a>
+        </div>
+
+        <div class="divider"></div>
+        <h2 class="secondary-header">Favorites</h2>
+
+        <!-- Favorites teacher grid -->
+        <div class="favorites-grid">
+            <button class="arrow-button">3</button> 
+            <div class="favorites-showcase">
+                <div class="teacher-card" onclick="openPopup('infoPopup')">
+                    <div class="avatar-container">
+                        <img src="pfp.jpg" alt="Ihor" class="avatar">
+                    </div>
+                    <div class="teacher-name">Ihor<br>Tkachuk</div>
+                    <div class="teacher-country">Ukraine</div>
+                </div>
+
+                <div class="teacher-card">
+                    <div class="avatar-container">
+                        <img src="pfp.jpg" alt="Anna" class="avatar">
+                    </div>
+                    <div class="teacher-name">Anna<br>Muzychyk</div>
+                    <div class="teacher-country">Belarus</div>
+                </div>
+
+                <div class="teacher-card">
+                    <div class="avatar-container">
+                        <img src="pfp.jpg" alt="John" class="avatar">
+                    </div>
+                    <div class="teacher-name">John<br>Burke</div>
+                    <div class="teacher-country">Belgium</div>
+                </div>
+
+                <div class="teacher-card">
+                    <div class="avatar-container">
+                        <img src="pfp.jpg" alt="Ari" class="avatar">
+                    </div>
+                    <div class="teacher-name">Ari<br>Tang</div>
+                    <div class="teacher-country">China</div>
+                </div>
+
+                <div class="teacher-card">
+                    <div class="avatar-container">
+                        <img src="pfp.jpg" alt="Rachel" class="avatar">
+                    </div>
+                    <div class="teacher-name">Rachel<br>Andrew</div>
+                    <div class="teacher-country">Uk</div>
+                </div>
+            <button class="arrow-button">4</button>    
+        </div>
+
+        <div class="divider"></div>
+
+        <footer>
+            <div class="info-text"></div>
+            <div class="bottom-navig-buttons">
+                <div class="bottom-header">
+                    <nav class="navig-links">
+                        <a href="" class="accent-color">Teachers</a>
+                        <a href="" class="accent-color">Statistics</a>
+                        <a href="" class="accent-color">Favorites</a>
+                        <a href="" class="accent-color">About</a>
+                    </nav>
+
+                    <button id="add-teacher-button">Add Teacher</button>
+                </div>
+            </div>
+        </footer>
+    
+    </main>
+</div>
+
+<div class="popup-overlay" id="info-popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h3>Teacher Info</h3>
+            <button class="popup-close" onclick="closePopup('infoPopup')">x</button>
+        </div>
+        <div class="popup-body">
+            <img src="pfp.jpg" alt="Ihor" class="info-popup-img">
+            
+            <h2 class="popup-name">Ihor Tkachuk <span class="star popup-star" >☆</span></h2>
+            <h4 class="popup-spec">Chemistry</h4>
+            <p class="popup-text">Kyiv, Ukraine</p>
+            <p class="popup-text">35, Male</p>
+            <p class="popup-text"><a href="#" class="popup-link">ihor_tkachuk@domain.com</a></p>
+            <p class="popup-text">+380964993252</p>
+            
+            <p class="popup-description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab autem consectetur culpa cumque, distinctio dolor dolorem. 
+                <br><br><a href="#" class="popup-link toggle-map">toggle map</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay" id="addPopup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h3>Add Teacher</h3>
+            <button class="popup-close">x</button>
+        </div>
+        <div class="popup-body">
+            <form class="add-form-grid" onsubmit="event.preventDefault(); closePopup('addPopup');">
+                <div class="form-group full-width">
+                    <label>Name</label>
+                    <input type="text" placeholder="Enter name">
+                </div>
+                <div class="form-group full-width">
+                    <label>Speciality</label>
+                    <select><option>Mathematics</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Country</label>
+                    <select><option>Ukraine</option></select>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel">
+                </div>
+                <div class="form-group full-width">
+                    <label>Date of birth</label>
+                    <input type="date">
+                </div>
+                <div class="form-group full-width">
+                    <label>Sex</label>
+                    <div class="radio-group">
+                        <input type="radio" name="sex" id="male"> <label for="male">Male</label>
+                        <input type="radio" name="sex" id="female"> <label for="female">Female</label>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label>Notes (optional)</label>
+                    <textarea rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn add-btn full-width">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openPopup(id) {
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function closePopup(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('popup-overlay')) {
+            event.target.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
