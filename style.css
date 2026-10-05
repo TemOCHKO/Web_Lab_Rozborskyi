@@ -24,25 +24,24 @@ body {
 }
 
 
-
+header {
+    margin-left: 2em;
+    margin-right: 2em;
+}
 
 .bottom-header {
     display: flex;
     justify-content: space-between;
+    color: #f25b50;
+    margin-top: 2.5em;
 }
 
 .top-header {
     display: flex;
     justify-content: space-between;
-    margin-left: 2em;
-    margin-right: 2em;
     align-items: end;
 }
 
-.add-teacher-button {
-    float: left;
-    margin-right: 10px
-}
 
 .main-title {
     font-size: 3.5rem;
@@ -56,7 +55,7 @@ body {
 }
 
 .search-button {
-    border: 2px solid #f25b50;
+    border: 1.5px solid #f25b50;
     padding: 8px 16px;
     background-color: #ffffff; 
     color: #f25b50;
@@ -68,3 +67,31 @@ body {
     width: 15em; 
 
 }
+
+.add-teacher-button {
+    float: right;
+    border: 1.5px solid #f25b50;
+    background-color: #ffffff; 
+    width: 8em; 
+    height: 2.4em;
+    font-size: 1em;
+    font-weight: 550;
+    color: #f25b50;
+}
+
+
+
+
+.navig-links {
+    display: flex;
+    align-items: center;
+    gap: 1.8em;
+}
+
+.accent-color {
+    color: #f25b50;
+    font-size: 1em;
+    font-weight: 550;
+    text-decoration: none;
+}
+
