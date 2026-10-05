@@ -5,6 +5,8 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+
+
 body {
     color: #333;
     background-color: #f5f4f4; 
@@ -15,8 +17,54 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto; 
-    padding: 0 30px;
+    padding: 15px 30px;
     background-color: #ffffff; 
     min-height: 100vh; 
     box-shadow: 0 0 15px rgba(0,0,0,0.05); 
+}
+
+
+
+
+.bottom-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2em;
+    margin-right: 2em;
+    align-items: end;
+}
+
+.add-teacher-button {
+    float: left;
+    margin-right: 10px
+}
+
+.main-title {
+    font-size: 3.5rem;
+    text-shadow: -2px -1px #f25b50, 0 2px #f25b50, 2px 3px black; 
+    color: white;
+}
+
+.group-floating-right {
+    float: right;
+    margin-bottom: 0.5em;
+}
+
+.search-button {
+    border: 2px solid #f25b50;
+    padding: 8px 16px;
+    background-color: #ffffff; 
+    color: #f25b50;
+}
+
+#site-search {
+    padding: 8px;
+    margin-right: 1em;
+    width: 15em; 
+
 }
