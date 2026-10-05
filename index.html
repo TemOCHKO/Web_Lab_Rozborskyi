@@ -36,15 +36,38 @@
         <h2 class="secondary-header">Top Teachers</h2>
 
         <div class="search-filters">
-            <label>Age<select><option>18-31</option><option>32-45</option></select></label>
+            <div class="filter-item">
+                <label>Age</label>
+                <select><option>18-31</option><option>32-45</option></select>
+            </div>
+
             <div class="vertical-divider-dots"></div>
-            <label>Region<select><option>Europe</option><option>Asia</option></select></label>
+
+            <div class="filter-item">
+                <label>Region</label>
+                <select><option>Europe</option><option>Asia</option></select>
+            </div>
+
             <div class="vertical-divider-dots"></div>
-            <label>Sex<select><option>Male</option><option>Female</option></select></label>
+
+            <div class="filter-item">
+                <label>Sex</label>
+                <select><option>Male</option><option>Female</option></select>
+            </div>
+            
             <div class="vertical-divider-dots"></div>
-            <label><input type="checkbox">Only with photo</label>
-            <div class="vertical-divider-dots"></div>
-            <label><input type="checkbox">Only favorites</label>
+
+            <div class="filter-item checkbox-item">
+                <input type="checkbox" id="photo">
+                <label for="photo">Only with photo</label>
+            </div>
+    
+             <div class="vertical-divider-dots"></div>
+
+            <div class="filter-item checkbox-item">
+                <input type="checkbox" id="favorites">
+                <label for="favorites">Only favorites</label>
+            </div>
         </div>
             
         <!-- Teacher grid -->
