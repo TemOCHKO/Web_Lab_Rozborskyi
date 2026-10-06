@@ -44,7 +44,7 @@ header {
 
 
 .main-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     text-shadow: -2px -1px #f25b50, 0 2px #f25b50, 2px 3px black; 
     color: white;
 }
@@ -56,25 +56,26 @@ header {
 
 .search-button {
     border: 1.5px solid #f25b50;
-    padding: 8px 16px;
+    padding: 10px 22px;
     background-color: #ffffff; 
     color: #f25b50;
+    font-size: 0.8em;
+    font-weight: 600;
 }
 
 #site-search {
-    padding: 8px;
+    padding: 10px;
     margin-right: 1em;
-    width: 15em; 
-
+    width: 16em; 
 }
 
 .add-teacher-button {
     float: right;
     border: 1.5px solid #f25b50;
     background-color: #ffffff; 
-    width: 8em; 
-    height: 2.4em;
-    font-size: 1em;
+    width: 9em; 
+    height: 2.7em;
+    font-size: 1.1em;
     font-weight: 550;
     color: #f25b50;
 }
@@ -90,14 +91,14 @@ header {
 
 .accent-color {
     color: #f25b50;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 550;
     text-decoration: none;
 }
 
 .divider {
-    border-top: 2px solid #333;
-    margin: 30px auto 30px;
+    border-top: 1px solid #333;
+    margin: 40px auto 40px;
     width: 50%; 
 }
 
@@ -117,17 +118,24 @@ header {
 .vertical-divider-dots {
     border-left: 2px dotted rgb(92, 92, 92);
     height: 2em;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.filter-divider {
+    margin-left: 10px;
 }
 
 .filter-item select{
     padding: 10px 10px;
     border: 1.35px solid black;
+    font-size: 0.85em;
+    font-weight: 500;
 }
 
 .filter-item label {
-    font-size: 0.8em;
+    font-size: 0.85em;
+    color: grey;
     vertical-align: middle;
 }
 
@@ -146,7 +154,7 @@ header {
     align-items: center;
     justify-content: flex-start;
     width: fit-content;       
-    margin: 2em 80px auto;
+    margin: 3em 80px auto;
     gap: 2.5em; 
 }
 
@@ -194,6 +202,63 @@ header {
     margin-top: 7%;
     font-size: 0.7em;
     font-weight: 500;
-
 }
+
+.statistics {
+    width: calc(100% - 4em);
+    border-collapse: collapse;
+    font-size: 16px;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.statistics th, 
+.statistics td {
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.statistics th {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: #454343;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #8b8888;
+}
+
+.statistics th:first-child {
+    text-align: left; 
+    padding-left: 2em;
+}
+
+.statistics td:first-child {
+    text-align: left; 
+}
+
+.statistics tbody tr:nth-child(even) {
+    background-color: #faeef4; 
+}
+
+
+.statistics th:hover {
+    background-color: #e1dede;
+    border-bottom: 3px solid #333;
+    padding-bottom: 15px; 
+}
+
+.sort-arrow {
+    color: rgb(66, 132, 207);
+    opacity: 0;
+    margin-left: 8px;
+    font-size: 18px;
+    transition: opacity 0.3s;
+}
+
+.statistics th:hover .sort-arrow {
+    opacity: 0.6; 
+}
+
 

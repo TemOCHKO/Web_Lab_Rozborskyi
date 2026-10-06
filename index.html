@@ -14,7 +14,7 @@
         <div class="top-header">
             <h1 class="main-title">Teachinder</h1>
             <div class="group-floating-right">
-                <input type="search" id="site-search" name="q" placeholder="Name, note or age to search"/>
+                <input type="search" id="site-search" name="q" placeholder="Name,note or age to search"/>
                 <button class="search-button">Search</button>
             </div>
         </div>
@@ -38,6 +38,7 @@
         <div class="search-filters">
             <div class="filter-item">
                 <label>Age</label>
+                <span class="filter-divider"></span>
                 <select><option>18-31</option><option>32-45</option></select>
             </div>
 
@@ -45,6 +46,7 @@
 
             <div class="filter-item">
                 <label>Region</label>
+                <span class="filter-divider"></span>
                 <select><option>Europe</option><option>Asia</option></select>
             </div>
 
@@ -52,6 +54,7 @@
 
             <div class="filter-item">
                 <label>Sex</label>
+                <span class="filter-divider"></span>
                 <select><option>Male</option><option>Female</option></select>
             </div>
             
@@ -142,17 +145,90 @@
         <h2 class="secondary-header">Statistics</h2>
         
         <!-- Statistics grid -->
-        <div class="statistics">
-            <table>
-                <thead>
+        <table class="statistics">
+            <thead>
+                <tr>
+                    <th>Name <span class="sort-arrow">↓</span></th>
+                    <th>Specialty <span class="sort-arrow">↓</span></th>
+                    <th>Age <span class="sort-arrow">↓</span></th>
+                    <th>Gender <span class="sort-arrow">↓</span></th>
+                    <th>Nationality <span class="sort-arrow">↓</span></th>
+                </tr>
+            </thead>
 
-                </thead>
-
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
+            <tbody>
+                <tr>
+                    <td>Daisy Alexander</td>
+                    <td>Chemistry</td>
+                    <td>28</td>
+                    <td>Female</td>
+                <td>Vietnam</td>
+                </tr>
+                <tr>
+                    <td>Julia Bradley</td>
+                    <td>Math</td>
+                    <td>26</td>
+                    <td>Female</td>
+                    <td>USA</td>
+                </tr>
+                <tr>
+                    <td>Rita Hart</td>
+                    <td>Art</td>
+                    <td>41</td>
+                    <td>Female</td>
+                    <td>Ireland</td>
+                </tr>
+                <tr>
+                    <td>Jonathan Jacobs</td>
+                    <td>Math</td>
+                    <td>32</td>
+                    <td>Male</td>
+                    <td>England</td>
+                </tr>
+                <tr>
+                    <td>Nathaniel White</td>
+                    <td>Computer Science</td>
+                    <td>37</td>
+                    <td>Male</td>
+                    <td>Austria</td>
+                </tr>
+                <tr>
+                    <td>Frank Medina</td>
+                    <td>English</td>
+                    <td>43</td>
+                    <td>Male</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Ella Curtis</td>
+                    <td>Chess</td>
+                    <td>34</td>
+                    <td>Female</td>
+                    <td>USA</td>
+                </tr>
+                <tr>
+                    <td>Claire Simmmons</td>
+                    <td>Art</td>
+                    <td>38</td>
+                    <td>Female</td>
+                    <td>Netherlands</td>
+                </tr>
+                <tr>
+                    <td>Benjamin Knight</td>
+                    <td>Biology</td>
+                    <td>44</td>
+                    <td>Male</td>
+                    <td>Scotland</td>
+                </tr>
+                <tr>
+                    <td>Norma Rose</td>
+                    <td>Statistics</td>
+                    <td>36</td>
+                    <td>Female</td>
+                    <td>France</td>
+                </tr>
+            </tbody>
+        </table>
 
         <div class="pagination">
             <span class="active">1</span>
