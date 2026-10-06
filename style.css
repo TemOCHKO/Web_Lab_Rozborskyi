@@ -238,7 +238,7 @@ header {
     font-size: 1.2em;
     color: #454343;
     transition: background-color 0.2s;
-    border-bottom: 1px solid #8b8888;
+    border-bottom: 1.5px solid #8b8888;
 }
 
 .statistics th:first-child {
@@ -290,3 +290,17 @@ header {
     text-decoration: none;
 }
 
+.favorites-showcase {
+    margin-top: 1.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.3em;
+}
+
+.arrow-button {
+    font-size: 5em;
+    color: grey;
+    background-color: #ffffff; 
+    border: 0px solid blue;
+}
