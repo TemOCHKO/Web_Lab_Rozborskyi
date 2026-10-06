@@ -139,3 +139,61 @@ header {
 .checkbox-item input {
     margin: 0; 
 }
+
+.teacher-showcase {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;       
+    margin: 2em 80px auto;
+    gap: 2.5em; 
+}
+
+.teacher-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    position: relative; 
+    transition: transform 0.2s;
+}
+
+.pfp-container {
+    position: relative;
+    width: 150px; 
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%; 
+    border: 4px solid #f25b50;
+    overflow: hidden; 
+}
+
+.pfp-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    float: none; 
+}
+
+
+.teacher-name {
+    font-size: 1.2em;
+    font-weight: 550;
+}
+
+.teacher-subject {
+    margin-top: 6%;
+    font-size: 0.9em;
+    font-weight: 400;
+    color: grey;
+}
+
+.teacher-country {
+    margin-top: 7%;
+    font-size: 0.7em;
+    font-weight: 500;
+
+}
+
