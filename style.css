@@ -36,6 +36,7 @@ header {
 .bottom-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: #f25b50;
     margin-top: 2.5em;
 }
@@ -49,8 +50,13 @@ header {
 
 .main-title {
     font-size: 3rem;
-    text-shadow: -2px -1px #f25b50, 0 2px #f25b50, 2px 2px black; 
+    text-shadow:  -2px -1px #f25b50, 2px 1px black; 
     color: white;
+}
+
+.main-title:hover {
+    cursor: pointer;
+    text-shadow: -3px -1px #f25b50, 3px 1px black; 
 }
 
 .group-floating-right {
@@ -66,6 +72,11 @@ header {
     font-size: 1rem;
     font-weight: 500;
     border-radius: 1%;
+}
+
+.search-button:hover {
+    background-color: #f25b50;
+    color: white;
 }
 
 .site-search {
@@ -87,7 +98,10 @@ header {
     border-radius: 1%;
 }
 
-
+.add-teacher-button:hover {
+    background-color: #bb4840;
+    color: white;
+}
 
 .navig-links {
     display: flex;
@@ -98,8 +112,12 @@ header {
 .accent-color {
     color: #f25b50;
     font-size: 1em;
-    font-weight: 550;
+    font-weight: 500;
     text-decoration: none;
+}
+
+.accent-color:hover {
+    color: #bb4840;
 }
 
 .divider {
@@ -146,6 +164,9 @@ header {
     vertical-align: middle;
 }
 
+.checkbox-item label:hover {
+    color: black;
+}
 
 .checkbox-item {
     gap: 6px;
@@ -184,6 +205,10 @@ header {
     border-radius: 50%; 
     border: 3px solid #f25b50;
     overflow: hidden; 
+}
+
+.pfp-container:hover {
+    border: 3.5px solid #a3423b;
 }
 
 .pfp-container img {
@@ -231,7 +256,7 @@ header {
 }
 
 .statistics th {
-    padding-left: 2.8em;
+    padding-left: 2.6em;
     text-align: center;
     cursor: pointer;
     font-weight: 500;
@@ -261,14 +286,16 @@ header {
 
 .sort-arrow {
     color: rgb(66, 132, 207);
+    font-weight: 500;
     opacity: 0;
-    margin-left: 8px;
-    font-size: 18px;
+    margin-left: 10px;
+    font-size: 1em;
     transition: opacity 0.3s;
 }
 
 .statistics th:hover .sort-arrow {
     opacity: 0.6; 
+    padding-bottom: -20px;
 }
 
 .pagination {
@@ -303,4 +330,24 @@ header {
     color: grey;
     background-color: #ffffff; 
     border: 0px solid blue;
+    margin-bottom: 0.5em;
+}
+
+.arrow-button:hover {
+    color: black;
+}
+
+.info-text {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.info-text p {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.bottom-navig {
+    margin-left: 2em;
+    margin-right: 2em;
 }
