@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachinder</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="popups.css">
 </head>
 <body>
 
@@ -95,6 +96,7 @@
                 <div class="pfp-container">
                     <img src="pfp.jpg" alt="Floor" class="avatar">
                 </div>
+                <span class="star">★</span>
                 <div class="teacher-name">Floor<br>Jansen</div>
                 <div class="teacher-subject">Vocal</div>
                 <div class="teacher-country">Denmark</div>
@@ -243,8 +245,8 @@
 
         <!-- Favorites teacher grid -->
         <div class="favorites-grid">
+            <button class="arrow-button">‹</button> 
             <div class="favorites-showcase">
-                <button class="arrow-button">‹</button> 
                 <div class="teacher-card" onclick="openPopup('infoPopup')">
                     <div class="pfp-container">
                         <img src="pfp.jpg" alt="Ihor" class="avatar">
@@ -284,8 +286,8 @@
                     <div class="teacher-name">Rachel<br>Andrew</div>
                     <div class="teacher-country">Uk</div>
                 </div>
-                <button class="arrow-button">›</button>    
             </div>
+            <button class="arrow-button">›</button>    
         </div>
 
         <div class="divider"></div>
@@ -307,7 +309,7 @@
                         <a href="" class="accent-color">About</a>
                     </nav>
 
-                    <button class="add-teacher-button">Add Teacher</button>
+                    <button class="add-teacher-button " onclick="openPopup('addPopup')">Add Teacher</button>
                 </div>
             </div>
         </footer>
@@ -315,7 +317,7 @@
     </main>
 </div>
 
-<div class="popup-overlay" id="info-popup">
+<div class="popup-overlay" id="infoPopup">
     <div class="popup-content">
         <div class="popup-header">
             <h3>Teacher Info</h3>
@@ -324,7 +326,7 @@
         <div class="popup-body">
             <img src="pfp.jpg" alt="Ihor" class="info-popup-img">
             
-            <h2 class="popup-name">Ihor Tkachuk <span class="star popup-star" >☆</span></h2>
+            <h2 class="popup-name">Ihor Tkachuk</h2>
             <h4 class="popup-spec">Chemistry</h4>
             <p class="popup-text">Kyiv, Ukraine</p>
             <p class="popup-text">35, Male</p>
@@ -332,7 +334,7 @@
             <p class="popup-text">+380964993252</p>
             
             <p class="popup-description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab autem consectetur culpa cumque, distinctio dolor dolorem. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
                 <br><br><a href="#" class="popup-link toggle-map">toggle map</a>
             </p>
         </div>
@@ -375,13 +377,17 @@
                     <label>Date of birth</label>
                     <input type="date">
                 </div>
-                <div class="form-group full-width">
+                <div class="form-group inline-group full-width">
                     <label>Sex</label>
                     <div class="radio-group">
-                        <input type="radio" name="sex" id="male"> <label for="male">Male</label>
-                        <input type="radio" name="sex" id="female"> <label for="female">Female</label>
+                        <label for="male">Male</label> <input type="radio" name="sex" id="male"> 
+                        <label for="female">Female</label><input type="radio" name="sex" id="female"> 
                     </div>
                 </div>
+                <div class="form-group inline-group full-width">
+                    <label for="bg-color">Background color</label>
+                    <input type="color" id="bg-color" name="bg-color" value="#000000">
+                </div> 
                 <div class="form-group full-width">
                     <label>Notes (optional)</label>
                     <textarea rows="4"></textarea>
@@ -401,11 +407,19 @@
         document.getElementById(id).style.display = 'none';
     }
 
-    window.onclick = function(event) {
-        if (event.target.classList.contains('popup-overlay')) {
-            event.target.style.display = "none";
-        }
-    }
+    document.querySelectorAll('.popup-close').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.closest('.popup-overlay').style.display = 'none';
+        });
+    });
+
+    document.querySelectorAll('.popup-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+    });
 </script>
 
 </body>
