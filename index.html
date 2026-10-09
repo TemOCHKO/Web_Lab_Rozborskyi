@@ -113,6 +113,7 @@
                 <div class="pfp-container">
                     <img src="pfp.jpg" alt="Ari" class="avatar">
                 </div>
+                <span class="star">★</span>
                 <div class="teacher-name">Ari<br>Tang</div>
                 <div class="teacher-subject">Biology</div>
                 <div class="teacher-country">China</div>
@@ -317,7 +318,9 @@
     </main>
 </div>
 
-<div class="popup-overlay" id="infoPopup">
+<!-- Popups -->
+
+<div class="popup-background" id="infoPopup">
     <div class="popup-content">
         <div class="popup-header">
             <h3>Teacher Info</h3>
@@ -327,7 +330,7 @@
             <img src="pfp.jpg" alt="Ihor" class="info-popup-img">
             
             <h2 class="popup-name">Ihor Tkachuk</h2>
-            <h4 class="popup-spec">Chemistry</h4>
+            <h4 class="popup-specialization">Chemistry</h4>
             <p class="popup-text">Kyiv, Ukraine</p>
             <p class="popup-text">35, Male</p>
             <p class="popup-text"><a href="#" class="popup-link">ihor_tkachuk@domain.com</a></p>
@@ -341,14 +344,14 @@
     </div>
 </div>
 
-<div class="popup-overlay" id="addPopup">
+<div class="popup-background" id="addPopup">
     <div class="popup-content">
         <div class="popup-header">
             <h3>Add Teacher</h3>
             <button class="popup-close">x</button>
         </div>
         <div class="popup-body">
-            <form class="add-form-grid" onsubmit="event.preventDefault(); closePopup('addPopup');">
+            <form class="add-teacher-container" onsubmit="event.preventDefault(); closePopup('addPopup');">
                 <div class="form-group full-width">
                     <label>Name</label>
                     <input type="text" placeholder="Enter name">
@@ -392,7 +395,7 @@
                     <label>Notes (optional)</label>
                     <textarea rows="4"></textarea>
                 </div>
-                <button type="submit" class="btn add-btn full-width">Add</button>
+                <button type="submit" class="btn add-entity-btn full-width">Add</button>
             </form>
         </div>
     </div>
@@ -409,11 +412,11 @@
 
     document.querySelectorAll('.popup-close').forEach(btn => {
         btn.addEventListener('click', function() {
-            this.closest('.popup-overlay').style.display = 'none';
+            this.closest('.popup-background').style.display = 'none';
         });
     });
 
-    document.querySelectorAll('.popup-overlay').forEach(overlay => {
+    document.querySelectorAll('.popup-background').forEach(overlay => {
         overlay.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.style.display = 'none';
