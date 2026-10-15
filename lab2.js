@@ -87,6 +87,9 @@ export function mapUsers(randomUserArr, additionalUsersArr) {
     return Array.from(userMap.values())
 }
 
+
+// VALIDATION
+
 function isStringAndCapitalized(word) {
     return typeof word === 'string' 
     && word.length > 0 
@@ -96,26 +99,22 @@ function isStringAndCapitalized(word) {
 export function validateUserObject(user) {
     if (!isStringAndCapitalized(user.full_name) || !isStringAndCapitalized(user.gender) ||
             !isStringAndCapitalized(user.note) || !isStringAndCapitalized(user.state) || !isStringAndCapitalized(user.city) || !isStringAndCapitalized(user.country)) {
-        console.log('String2');
-        return false;
+        return {status: false, problem: 'Error validating text fields'};
     }
 
     if (typeof user.age !== 'number' || Number.isNaN(user.age)) {
-        console.log('Age');
-        return false;
+        return {status: false, problem: 'Age is Invalid'};
     }
 
     if (!validatePhone(user.phone, user.country)) {
-        console.log('Phone');
-        return false;
+        return {status: false, problem: 'Phone not matching country ' + user.country};
     }
 
     if (typeof user.email !== 'string' || !user.email.includes('@')) {
-        console.log('Email');
-        return false;
+        return {status: false, problem: 'Email is invalid'};
     }
 
-    return true;
+    return {status: true, problem: ''};
 }
 
 // https://github.com/mnestorov/regex-patterns#spain
@@ -148,6 +147,9 @@ function validatePhone(phone, country) {
 
     return format.test(phone);
 }
+
+
+// FILTER
 
 const allowedFilters = ['age', 'gender', 'favorite', 'country'];
 class FieldFilterCriteria {
@@ -193,6 +195,9 @@ export function filterUsers(users, filterCriteria) {
     return users.slice().filter((user) => filterSpecs.filter(user));
 }  
 
+
+// SORT
+
 function propComparator(prop) {
     return function(a, b) {
 
@@ -233,6 +238,9 @@ export function sortUsers(users, sortMethod, order='asc') {
 
     return [...users];
 }
+
+
+// SEARCH
 
 const otherAllowedSearchFields = ['full_name', 'note'];
 function doesMatch(user, query) {
@@ -275,8 +283,15 @@ function doesMatch(user, query) {
 }
 
 export function searchUsers(users, query) {
-    return users.filter(user => doesMatch(user, query));
+    if (query === undefined || query === null || query === '' || query.trim() === '') {
+        return [...users];
+    }
+
+    return users.slice().filter(user => doesMatch(user, query));
 }
+
+
+// PERCENTAGE
 
 export function getUsersSearchPercentage(users, query) {
     if (users === undefined || users === null || users.length === 0) {
@@ -284,18 +299,34 @@ export function getUsersSearchPercentage(users, query) {
     }
 
     const userFittingSearch = searchUsers(users, query);
-    return (userFittingSearch.length / users.length) * 100.0;
+    return Math.round((userFittingSearch.length / users.length) * 100);
 } 
 
-const arr = mapUsers(randomUserMock, additionalUsers); 
-console.log("\n\n\nSEARCH USERS\n")
-console.log(searchUsers(arr, '<30'));
 
-let filteredUsers = filterUsers(arr, {age: '18-30', country: 'Australia'});
+
+const arr = mapUsers(randomUserMock, additionalUsers); 
+
 console.log("\n\n\nVALIDATE USER\n");
-for (let i = 0; i < filteredUsers.length; i++) {
-    console.log('Validated user - ' + filteredUsers[i].full_name + " - " + validateUserObject(filteredUsers[i]));
+for (let i = 0; i < arr.length; i++) {
+    const validationResult = validateUserObject(arr[i]);
+    validationResult.status === true ? console.log('Validated user - ' + arr[i].full_name + " successfully")
+                    : console.log('Error validating user - ' + arr[i].full_name + ". Problem - " + validationResult.problem);
 }
+
+const sFilter = '<35';
+console.log("\n\n\nSEARCH USERS WITH AGE " + sFilter + "\n")
+const searchedUsers = searchUsers(arr, sFilter); 
+
+const searchFilter = '<50';
+console.log(searchedUsers);
+console.log("\n\n\nPERCENTAGE OF USERS " + searchFilter + "\n")
+console.log(getUsersSearchPercentage(arr, searchFilter));
+
+let filteredUsers = filterUsers(arr, {country: 'Spain'});
+
 console.log("\n\n\nFILTER USERS\n");
 console.log(filteredUsers);
-//console.log(sortUsers(arr, 'b_date').slice(0, 3));
+
+const sortMethod = 'b_date';
+console.log("\n\n\nSORT USERS BY " + sortMethod + '\n')
+console.log(sortUsers(arr, sortMethod, 'desc').slice(0, 5));
