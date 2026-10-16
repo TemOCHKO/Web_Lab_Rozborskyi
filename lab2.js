@@ -59,7 +59,8 @@ export function mapUsers(randomUserArr, additionalUsersArr) {
             timezone: user.timezone, 
             email: user.email, 
             b_date: user.b_day, 
-            age: user.age ?? calculateAge(user.b_day), 
+            //age: user.age ?? calculateAge(user.b_day), 
+            age: user.age, 
             phone: user.phone, 
             picture_large: user.picture_large ?? null,
             picture_thumbnail: user.picture_thumbnail ?? null, 
@@ -117,7 +118,7 @@ export function validateUserObject(user) {
     return {status: true, problem: ''};
 }
 
-// https://github.com/mnestorov/regex-patterns#spain
+// https://github.com/mnestorov/regex-patterns
 const phoneToCountry = {
   Germany: /^\d{3,4}-\d{7,8}$/,                 
   Ireland: /^\d{3}-\d{3}-\d{4}$/,               
@@ -198,13 +199,13 @@ export function filterUsers(users, filterCriteria) {
 
 // SORT
 
-function propComparator(prop) {
+function sortComparator(field) {
     return function(a, b) {
 
-        let aValue = a[prop];
-        let bValue = b[prop];
+        let aValue = a[field];
+        let bValue = b[field];
 
-        if (prop === 'b_date') {
+        if (field === 'b_date') {
             aValue = new Date(aValue).getTime();
             bValue = new Date(bValue).getTime();
         }
@@ -222,21 +223,21 @@ function propComparator(prop) {
 const allowedSortingFilters = ['full_name', 'b_date', 'age', 'country'];
 export function sortUsers(users, sortMethod, order='asc') {
     if (users === undefined || users === null || users.length === 0) {
-        return [...users];
+        return users.slice();
     }
 
     if (!allowedSortingFilters.includes(sortMethod)) {
-        return [...users];
+        return users.slice();
     }
 
     if (order === 'asc') {
-        return users.slice().sort(propComparator(sortMethod));
+        return users.slice().sort(sortComparator(sortMethod));
     }
     if (order === 'desc') {
-        return users.sort(propComparator(sortMethod)).toReversed();
+        return users.sort(sortComparator(sortMethod)).toReversed();
     }
 
-    return [...users];
+    return users.slice();
 }
 
 
@@ -313,14 +314,6 @@ for (let i = 0; i < arr.length; i++) {
                     : console.log('Error validating user - ' + arr[i].full_name + ". Problem - " + validationResult.problem);
 }
 
-const sFilter = '<35';
-console.log("\n\n\nSEARCH USERS WITH AGE " + sFilter + "\n")
-const searchedUsers = searchUsers(arr, sFilter); 
-
-const searchFilter = '<50';
-console.log(searchedUsers);
-console.log("\n\n\nPERCENTAGE OF USERS " + searchFilter + "\n")
-console.log(getUsersSearchPercentage(arr, searchFilter));
 
 let filteredUsers = filterUsers(arr, {country: 'Spain'});
 
@@ -330,3 +323,13 @@ console.log(filteredUsers);
 const sortMethod = 'b_date';
 console.log("\n\n\nSORT USERS BY " + sortMethod + '\n')
 console.log(sortUsers(arr, sortMethod, 'desc').slice(0, 5));
+
+const sFilter = '<35';
+console.log("\n\n\nSEARCH USERS WITH AGE " + sFilter + "\n")
+const searchedUsers = searchUsers(arr, sFilter); 
+
+const searchFilter = '<50';
+console.log(searchedUsers);
+console.log("\n\n\nPERCENTAGE OF USERS " + searchFilter + "\n")
+console.log(getUsersSearchPercentage(arr, searchFilter));
+
