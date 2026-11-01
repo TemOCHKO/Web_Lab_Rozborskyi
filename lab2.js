@@ -159,19 +159,19 @@ class FieldFilterCriteria {
         this.value = value;
     }
 
-    isValidFilter(subj) {
+    isValidFilter(user) {
         if (this.value === undefined || this.value === null || this.value === '' || !allowedFilters.includes(this.topic)) {
             return true;
         }
 
         if (this.topic === 'age') {
             const [min, max] = this.value.split('-').map(Number);
-            const itemValue = Number(subj[this.topic]);
+            const itemValue = Number(user[this.topic]);
 
             return itemValue >= min && itemValue <= max;
         }
 
-        return subj[this.topic] === this.value;
+        return user[this.topic] === this.value;
     }
 }
 
@@ -315,7 +315,7 @@ for (let i = 0; i < arr.length; i++) {
 }
 
 
-let filteredUsers = filterUsers(arr, {country: 'Spain'});
+let filteredUsers = filterUsers(arr, {country: 'Spain', gender: 'Male'});
 
 console.log("\n\n\nFILTER USERS\n");
 console.log(filteredUsers);
@@ -330,6 +330,6 @@ const searchedUsers = searchUsers(arr, sFilter);
 
 const searchFilter = '<50';
 console.log(searchedUsers);
-console.log("\n\n\nPERCENTAGE OF USERS " + searchFilter + "\n")
+console.log("\n\n\nPERCENTAGE OF USERS " + searchFilter + "%\n")
 console.log(getUsersSearchPercentage(arr, searchFilter));
 
