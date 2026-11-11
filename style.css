@@ -218,7 +218,7 @@ header {
 }
 
 .pfp-container:hover {
-    border: 3.5px solid #a3423b;
+    border: 3.5px solid #a3423b !important;
 }
 
 .pfp-container img {
@@ -249,6 +249,17 @@ header {
     font-weight: 500;
 }
 
+.load-more-btn {
+    font-size: 11px;
+    color: rgb(65, 65, 143);
+    margin-left: 10%;
+    cursor: pointer;
+}   
+
+.load-more-btn:hover {
+    color: black;
+}
+
 /*Statistics table section*/
 
 .statistics {
@@ -276,6 +287,7 @@ header {
     color: #454343;
     transition: background-color 0.2s;
     border-bottom: 1.5px solid #8b8888;
+    user-select: none;
 }
 
 .statistics th:first-child {
@@ -322,7 +334,7 @@ header {
     margin-left: 1em;
 }
 
-#dots {
+.dots {
     font-weight: bold;
 }
 
@@ -330,6 +342,13 @@ header {
     color: rgb(98, 160, 205);
     margin-left: 1em;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.pagination a.active {
+    color: black;
+    cursor: text;
+    user-select: none; 
 }
 
 /*Favorite teachers section*/
