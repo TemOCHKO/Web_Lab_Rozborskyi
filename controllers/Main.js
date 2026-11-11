@@ -23,12 +23,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    const chartMethodContainer = document.querySelector('.choice-group');
+    if (chartMethodContainer) {
+        chartMethodContainer.addEventListener('change', () => {
+            paginate(getTeachersWithFilters(getFilters()));
+        });
+    }
+
     const searchButton = document.querySelector('.search-button');
     if (searchButton) {
         searchButton.addEventListener('click', () => {
             const searchInput = document.querySelector('.site-search');
             if (searchInput) {
-                if (searchInput.value === '' || searchInput.value.trim() === '') renderTeachers(getTeachers());
+                if (searchInput.value === '' || searchInput.value.trim() === '') {
+                    renderTeachers(getTeachers());
+                    paginate(getTeachers());
+                }
                 else {
                     let teachs = searchUsers(getTeachersWithFilters(getFilters()), searchInput.value);
                     renderTeachers(teachs);
@@ -42,7 +52,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (searchInput) {
         searchInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                if (searchInput.value === '' || searchInput.value.trim() === '') renderTeachers(getTeachers());
+                if (searchInput.value === '' || searchInput.value.trim() === '') {
+                    renderTeachers(getTeachers());
+                    paginate(getTeachers());
+                }
                 else {
                     let teachs = searchUsers(getTeachersWithFilters(getFilters()), searchInput.value);
                     console.log(teachs);

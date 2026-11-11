@@ -17,7 +17,6 @@ export async function initTeachers() {
         console.error('Could not fetch teachers:', error.message);
         teachers = [];
     }
-    console.log(teachers);
     return teachers;
 }
 

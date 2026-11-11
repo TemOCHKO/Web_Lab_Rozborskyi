@@ -100,30 +100,42 @@
         <div class="divider"></div>
         <h2 class="secondary-header">Statistics</h2>
         
-        <!-- Statistics grid -->
-        <table class="statistics">
-            <thead>
-                <tr>
-                    <th data-sort-key="full_name" data-sort-order="none">Name<span class="sort-arrow"> ↕</span></th>
-                    <th data-sort-key="specialty" data-sort-order="none">Specialty<span class="sort-arrow"> ↕</span></th>
-                    <th data-sort-key="age" data-sort-order="none">Age<span class="sort-arrow"> ↕</span></th>
-                    <th data-sort-key="b_date" data-sort-order="none">Birth date<span class="sort-arrow"> ↕</span></th>
-                    <th data-sort-key="nationality" data-sort-order="none">Nationality<span class="sort-arrow"> ↕</span></th>
-                </tr>
-            </thead>
+        <div class="default-stats hidden">
+            <!-- Statistics grid -->
+            <table class="statistics">
+                <thead>
+                    <tr>
+                        <th data-sort-key="full_name" data-sort-order="none">Name<span class="sort-arrow"> ↕</span></th>
+                        <th data-sort-key="specialty" data-sort-order="none">Specialty<span class="sort-arrow"> ↕</span></th>
+                        <th data-sort-key="age" data-sort-order="none">Age<span class="sort-arrow"> ↕</span></th>
+                        <th data-sort-key="b_date" data-sort-order="none">Birth date<span class="sort-arrow"> ↕</span></th>
+                        <th data-sort-key="nationality" data-sort-order="none">Nationality<span class="sort-arrow"> ↕</span></th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                
-            </tbody>
-        </table>
+                <tbody>
+                    
+                </tbody>
+            </table>
 
-        <div class="pagination">
-            <a>1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <span class="dots">...</span>
-            <a href="#">Last</a>
+            <div class="pagination">
+                <a>1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <span class="dots">...</span>
+                <a href="#">Last</a>
+            </div>
         </div>
+
+        <div class="chart-stats hidden">
+            <div class="choice-group">
+                <label for="course">By Course</label> <input type="radio" name="chart-method" id="course-chart" value="By Course" checked="checked"> 
+                <label for="age">By Age</label><input type="radio" name="chart-method" id="age-chart" value="By Age"> 
+                <label for="country">By Country</label><input type="radio" name="chart-method" id="country-chart" value="By Country"> 
+            </div>
+
+            <canvas id="teachersPieChart"></canvas>
+        </div>    
 
         <div class="divider"></div>
         <h2 class="secondary-header">Favorites</h2>

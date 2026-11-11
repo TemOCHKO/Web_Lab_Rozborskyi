@@ -190,25 +190,24 @@ class FieldFilterCriteria {
     }
 
     isValidFilter(user) {
-        if (this.value === undefined || this.value === null || this.value === '' || !allowedFilters.includes(this.topic)) {
+        if (_.isNil(this.value) || this.value === '' || !_.includes(allowedFilters, this.topic)) {
             return true;
         }
 
+        const userValue = _.get(user, this.topic);
         if (this.topic === 'age') {
-            const [min, max] = this.value.split('-').map(Number);
-            const itemValue = Number(user[this.topic]);
-
-            return itemValue >= min && itemValue <= max;
+            const [min, max] = _.map(_.split(this.value, '-'), Number);
+            const age = Number(userValue);
+                        
+            return _.inRange(age, min, max + 1);
         }
 
         if (this.topic === 'country') {
             const continent = getContinent(user[this.topic]);
-
-            
             return this.value === continent;
         }
 
-        return user[this.topic] === this.value;
+        return _.isEqual(userValue, this.value);
     }
 }
 
@@ -218,7 +217,7 @@ class FilterCriteria {
     }
 
     filter(subj) {
-        return this.criterias.every((criteria) => criteria.isValidFilter(subj));
+        return _.every(this.criterias, (criteria) => criteria.isValidFilter(subj));
     } 
 }
 
@@ -230,12 +229,12 @@ export function filterUsers(users, filterCriteria) {
         new FieldFilterCriteria('favorite', filterCriteria.favorite)  
     );
 
-    return users.slice().filter((user) => filterSpecs.filter(user));
+    return _.filter(users, (user) => filterSpecs.filter(user));
 }  
 
 
 // SORT
-
+/*
 function sortComparator(field) {
     return function(a, b) {
 
@@ -256,6 +255,7 @@ function sortComparator(field) {
         return 0;
     }
 }
+*/
 
 const allowedSortingFilters = ['full_name', 'b_date', 'gender', 'course', 'age', 'country'];
 export function sortUsers(users, sortMethod, order='asc') {
@@ -268,10 +268,10 @@ export function sortUsers(users, sortMethod, order='asc') {
     }
 
     if (order === 'asc') {
-        return users.slice().sort(sortComparator(sortMethod));
+        return _.sortBy(users, [`${sortMethod}`]);
     }
     if (order === 'desc') {
-        return users.slice().sort(sortComparator(sortMethod)).toReversed();
+        return _.orderBy(users, [`${sortMethod}`], ['desc']);
     }
 
     return users.slice();
@@ -282,50 +282,38 @@ export function sortUsers(users, sortMethod, order='asc') {
 
 const otherAllowedSearchFields = ['full_name', 'note'];
 function doesMatch(user, query) {
-    if (query === undefined || query === null || query === '') {
+    if (_.isEmpty(_.toString(query).trim())) {
         return false;
     }
 
-    // if query is number
-    if (!isNaN(Number(query)) && user.age == query) {
+    const cleanQuery = _.trim(_.toString(query)).toLowerCase();
+    const age = _.get(user, 'age');
+    const num = Number(cleanQuery.slice(1));
+
+    if (!isNaN(Number(cleanQuery)) && Number(cleanQuery) === age) {
         return true;
     }
 
-    query = String(query).trim().toLowerCase();
-
-    // if query is of type '<50' / '>18'
-    if (query.charAt(0) === '<' && query.length > 1) {
-        let num = Number(query.slice(1));
-        if (!isNaN(num) && user.age < num) {
-            return true;
-        }
+    if (_.startsWith(cleanQuery, '<') && !isNaN(num)) {
+        return _.lt(age, num);
     }
-    if (query.charAt(0) === '>' && query.length > 1) {
-         let num = Number(query.slice(1));
-        if (!isNaN(num) && user.age > num) {
-            return true;
-        }
+    if (_.startsWith(cleanQuery, '>') && !isNaN(num)) {
+        return _.gt(age, num);
     }
 
-    // for note and full_name
-    for (const field of otherAllowedSearchFields) {
-        let userValueField = user[field];
-
-        if (userValueField !== undefined || userValueField !== null) {
-            if (userValueField.toLowerCase().includes(query)) {
-                return true;
-            }
-        }
-    }
+    return _.some(otherAllowedSearchFields, (field) => {
+        const value = _.get(user, field);
+        return !_.isNil(value) && _.includes(_.toLower(value), cleanQuery);
+    });
 
 }
 
 export function searchUsers(users, query) {
-    if (query === '' || query.trim() === '') {
+    if (_.isEmpty(_.toString(query).trim())) {
         return null;
     }
 
-    if (query === undefined || query === null || query === '' || query.trim() === '') {
+    if (_.isNil(query)) {
         return [...users];
     }
 
@@ -343,3 +331,21 @@ export function getUsersSearchPercentage(users, query) {
     const userFittingSearch = searchUsers(users, query);
     return Math.round((userFittingSearch.length / users.length) * 100);
 } 
+
+export function getStatisticsForChart(teachers, method) {
+    const stats = {};
+    
+    teachers.forEach(teacher => {
+        var subject;
+        if (method === 'course') subject = teacher.course || 'Other';
+        else if (method === 'age') subject = teacher.age || 'N/A'; 
+        else subject = teacher.country || 'N/A';
+        stats[subject] = (stats[subject] || 0) + 1;
+    });
+
+    return {
+        labels: Object.keys(stats),   
+        data: Object.values(stats)   
+    };
+    
+}
