@@ -1,6 +1,7 @@
 import { addTeacher, getTeacherById, getAllTeachersCountries, getAllTeachersSpecialties } from '../models/teacherRepository.js';
-import { getFavoriteFilter } from './filterView.js'
-import { calculateAge, generateUUID, validateUserObject } from '../models/TeacherService.js'
+import { getFavoriteFilter } from './filterView.js';
+import { calculateAge, generateUUID, validateUserObject } from '../models/TeacherService.js';
+import { getDaysUntilNextBirthday } from '../models/utils/common.js';
 
 let currentMap = null;
 export function renderPopup(popUpId, user) {
@@ -39,6 +40,19 @@ export function renderPopup(popUpId, user) {
 
     const phoneHeader = popup.querySelector('#popup-phone');
     phoneHeader.textContent = user.phone || 'No Phone';
+
+    const birthdayHeader = popup.querySelector('#popup-birthday');
+    if (birthdayHeader) {
+        const daysLeft = getDaysUntilNextBirthday(user.b_date);
+        
+        if (daysLeft === null) {
+            birthdayHeader.textContent = 'Days until birthday: N/A';
+        } else if (daysLeft === 0) {
+            birthdayHeader.textContent = `Happy Birthday to ${user.full_name}!!`;
+        } else {
+            birthdayHeader.textContent = `Days until next birthday: ${daysLeft}`;
+        }
+    }
 
     const description = popup.querySelector('.popup-description');
     description.innerHTML = user.note + "<br><a href=\"#\" class=\"popup-link toggle-map\">toggle map</a>";

@@ -54,7 +54,11 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', { year: 'numeric',month: 'short', day: 'numeric'});
 }
 
-const statsMethodDefault = false;
+export function toggleStatsMethod() {
+    statsMethodDefault === false ? statsMethodDefault = true : statsMethodDefault = false;
+}
+
+let statsMethodDefault = false;
 const paginate = (teachers) => {
 
     if (statsMethodDefault) {
@@ -269,8 +273,6 @@ function renderTeachersChart(teachers) {
         }
     });
 }
-
-
 
 export {
     paginate

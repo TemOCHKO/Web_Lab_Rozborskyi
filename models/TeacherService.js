@@ -24,7 +24,7 @@ export function calculateAge(bDayString) {
 } 
 
 export function mapUsers(randomUserArr, additionalUsersArr) {
-    const formattedRandomUsers = randomUserArr.map(user => {
+    const formattedRandomUsers = _.map(randomUserArr, user => {
         return {
             gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1), 
             title: user.name.title, 
@@ -50,7 +50,7 @@ export function mapUsers(randomUserArr, additionalUsersArr) {
         }
     });
 
-    const formattedAdditionalUsers = additionalUsersArr.map(user => {
+    const formattedAdditionalUsers = _.map(additionalUsersArr, user => {
         return {
             gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1), 
             title: user.title, 
@@ -73,59 +73,91 @@ export function mapUsers(randomUserArr, additionalUsersArr) {
             favorite: user.favorite, 
             course: user.course,
             bg_color: user.bg_color, 
-            note: user.note === null ? 'Hi! My name is ' + user.full_name : user.note 
+            note: _.isNil(user.note) ? `Hi! My name is ${user.full_name}` : user.note        
         }
     });
-    const mergedUsers = [...formattedRandomUsers, ...formattedAdditionalUsers];
-    
-    let userMap = new Map();
-  
-    for (let i = 0; i < mergedUsers.length; i++) {
-        const user = mergedUsers[i];
-        const keyForUser = user.email;
-        
-        if (!userMap.has(keyForUser) && keyForUser !== undefined) {
-            userMap.set(keyForUser, user);
-        }
-    }
 
-    return Array.from(userMap.values())
+    return _.chain(formattedRandomUsers)
+        .concat(formattedAdditionalUsers)
+        .filter((user) => !_.isNil(user.email))
+        .uniqBy('email')
+        .value();
 }
 
 
 // VALIDATION
 
 function isStringAndCapitalized(word) {
-    return word !== undefined
-    && word !== null 
-    && typeof word === 'string' 
-    && word.length > 0 
-    && word.charAt(0).toUpperCase() === word.charAt(0);
+    if (!_.isString(word) || _.isEmpty(_.trim(word))) {
+        return false;
+    }
+
+    const firstChar = _.head(word);
+    return firstChar === _.toUpper(firstChar);
 }
 
+const VALIDATION_RULES = [
+    {
+        field: 'full_name',
+        validate: isStringAndCapitalized,
+        problem: 'Full Name is invalid. Should start with a capital letter'
+    },
+    {
+        field: 'city',
+        validate: isStringAndCapitalized,
+        problem: 'City is invalid. Should start with a capital letter'
+    },
+    {
+        field: 'country',
+        validate: isStringAndCapitalized,
+        problem: 'Country is invalid'
+    },
+    {
+        field: 'gender',
+        validate: isStringAndCapitalized,
+        problem: 'Gender is invalid'
+    },
+    {
+        field: 'note',
+        validate: isStringAndCapitalized,
+        problem: 'Notes field value is invalid. Should start with a capital letter'
+    },
+    {
+        field: 'course',
+        validate: isStringAndCapitalized,
+        problem: 'Course is invalid'
+    },
+    {
+        field: 'age',
+        validate: (val) => _.isNumber(val) && !_.isNaN(val),
+        problem: 'Age value is invalid'
+    },
+    {
+        field: 'email',
+        validate: (val) => _.isString(val) && _.includes(val, '@'),
+        problem: 'Email value is invalid'
+    }
+    /*
+    {
+        field: 'phone',
+        validate: (val, user) => validatePhone(val, _.get(user, 'country')),
+        problem: 'Phone value is invalid'
+    }
+    */
+];
+
 export function validateUserObject(user) {
-    const errors = []; 
-
-    if (!isStringAndCapitalized(user.full_name)) errors.push({field: 'full_name', problem: 'Full Name is invalid. Should start with a capital letter'});
-    if (!isStringAndCapitalized(user.city)) errors.push({field: 'city', problem: 'City is invalid. Should start with a capital letter'});
-    if (!isStringAndCapitalized(user.country) ) errors.push({field: 'country', problem: 'Country is invalid'});
-    if (!isStringAndCapitalized(user.gender)) errors.push({field: 'gender', problem: 'Gender is invalid'});
-    if (!isStringAndCapitalized(user.note)) errors.push({field: 'note', problem: 'Notes field value is invalid. Should start with a capital letter'});
-    if (!isStringAndCapitalized(user.course) ) errors.push({field: 'course', problem: 'Course is invalid'});
-
-    if (typeof user.age !== 'number' || Number.isNaN(user.age)) {
-        errors.push({field: 'age', problem: 'Age value is invalid'});
-    }
-
-    //if (!validatePhone(user.phone, user.country)) {
-    //    errors.push({field: 'phone', problem: 'Phone value is invalid'});
-    //}
-
-    if (typeof user.email !== 'string' || !user.email.includes('@')) {
-        errors.push({field: 'email', problem: 'Email value is invalid'});
-    }
-
-    return errors;
+    return _.reduce(
+        VALIDATION_RULES,
+        (errors, rule) => {
+            const value = _.get(user, rule.field);
+            if (!rule.validate(value, user)) {
+                errors.push({ field: rule.field, problem: rule.problem });
+            }
+            return errors;
+        },
+        []
+    );
 }
 
 // https://github.com/mnestorov/regex-patterns
@@ -168,7 +200,7 @@ function validatePhone(phone, country) {
     }
 
     let format = phoneToCountry[country];
-    if (format === undefined || format === null || format === '') {
+    if (_.isNil(format) || _.isEmpty(_.toString(format).trim())) {
         format = phoneToCountry.default;
     }
 

@@ -99,7 +99,10 @@
         </div>
         <div class="divider"></div>
         <h2 class="secondary-header">Statistics</h2>
-        
+
+        <div class="toggle-statistics">
+            <button>Toggle Stats</button>
+        </div>
         <div class="default-stats hidden">
             <!-- Statistics grid -->
             <table class="statistics">
@@ -142,49 +145,10 @@
 
         <!-- Favorites teacher grid -->
         <div class="favorites-grid">
-            <button class="arrow-button">‹</button> 
+            <button class="arrow-button prev-fav">‹</button> 
             <div class="favorites-showcase">
-                <div class="teacher-card" onclick="openPopup('infoPopup')">
-                    <div class="pfp-container">
-                        <img src="pfp.jpg" alt="Ihor" class="avatar">
-                    </div>
-                    <div class="teacher-name">Ihor<br>Tkachuk</div>
-                    <div class="teacher-country">Ukraine</div>
-                </div>
-
-                <div class="teacher-card">
-                    <div class="pfp-container">
-                        <img src="pfp.jpg" alt="Anna" class="avatar">
-                    </div>
-                    <div class="teacher-name">Anna<br>Muzychyk</div>
-                    <div class="teacher-country">Belarus</div>
-                </div>
-
-                <div class="teacher-card">
-                    <div class="pfp-container">
-                        <img src="pfp.jpg" alt="John" class="avatar">
-                    </div>
-                    <div class="teacher-name">John<br>Burke</div>
-                    <div class="teacher-country">Belgium</div>
-                </div>
-
-                <div class="teacher-card">
-                    <div class="pfp-container">
-                        <img src="pfp.jpg" alt="Ari" class="avatar">
-                    </div>
-                    <div class="teacher-name">Ari<br>Tang</div>
-                    <div class="teacher-country">China</div>
-                </div>
-
-                <div class="teacher-card">
-                    <div class="pfp-container">
-                        <img src="pfp.jpg" alt="Rachel" class="avatar">
-                    </div>
-                    <div class="teacher-name">Rachel<br>Andrew</div>
-                    <div class="teacher-country">Uk</div>
-                </div>
             </div>
-            <button class="arrow-button">›</button>    
+            <button class="arrow-button next-fav">›</button>    
         </div>
 
         <div class="divider"></div>
@@ -232,6 +196,7 @@
             <p class="popup-text" id="popup-data">35, Male</p>
             <p class="popup-text" id="popup-email"><a href="#" class="popup-link">ihor_tkachuk@domain.com</a></p>
             <p class="popup-text" id="popup-phone">+380964993252</p>
+            <p id="popup-birthday"></p>
             
             <p class="popup-description">
                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
