@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 paginate(getTeachersWithFilters(getFilters()));
                 closeAddTeacherPopup();
             } catch (error) {
-                console.error('Не вдалося зберегти викладача на сервері:', error.message);
+                console.error('Couldnt save teacher on server: ', error.message);
             }
         }
         }
