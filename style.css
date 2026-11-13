@@ -180,14 +180,14 @@ header {
 /* Top teachers section*/
 
 .teacher-showcase {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-    width: fit-content;       
-    margin: 3em 80px auto;
-    margin-bottom: 50px;
-    gap: 2.1em; 
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: start;
+    margin: 3em 2em 50px;
+    margin-left: 2em;
+    margin-right: 2em;
+    gap: 10px; 
 }
 
 .teacher-card {
@@ -489,6 +489,10 @@ header {
 }
 
 @media (max-width: 1024px) {
+    .teacher-showcase {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
     .favorites-showcase .teacher-card { 
         flex: 0 0 calc((100% - 60px) / 4);
     }
@@ -535,8 +539,10 @@ header {
         gap: 15px; 
     }
     
-    .teachers-showcase {
-        grid-template-columns: repeat(2, 1fr);
+    .teacher-showcase {
+        grid-template-columns: repeat(3, 1fr);
+        margin: 2em 1em 40px;
+        gap: 1.5em;
     }
     .search-filters {
         flex-direction: column;
@@ -565,12 +571,19 @@ header {
 
 
 @media (max-width: 650px) {
+    .teacher-showcase {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .favorites-showcase .teacher-card { 
         flex: 0 0 calc((100% - 20px) / 2);
     }
 }
 
 @media (max-width: 540px) {
+    .teacher-showcase {
+        grid-template-columns: 1fr;
+    }
+
     .favorites-showcase .teacher-card { 
         flex: 0 0 100%;
     }
