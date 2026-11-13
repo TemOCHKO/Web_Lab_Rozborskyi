@@ -106,7 +106,8 @@ function isStringAndCapitalized(word) {
 export function validateUserObject(user) {
     const errors = []; 
 
-    if (!isStringAndCapitalized(user.full_name)) errors.push({field: 'full_name', problem: 'Full Name is invalid. Should start with a capital letter'});
+    if (!isStringAndCapitalized(user.full_name)) errors.push({field: 'full_name', problem: 'First Name is invalid. Should start with a capital letter'});
+    else if (!isStringAndCapitalized(user.full_name.split(' ')[1])) errors.push({field: 'full_name', problem: 'Last Name is invalid. Should start with a capital letter'});
     if (!isStringAndCapitalized(user.city)) errors.push({field: 'city', problem: 'City is invalid. Should start with a capital letter'});
     if (!isStringAndCapitalized(user.country) ) errors.push({field: 'country', problem: 'Country is invalid'});
     if (!isStringAndCapitalized(user.gender)) errors.push({field: 'gender', problem: 'Gender is invalid'});
