@@ -2,9 +2,9 @@ import { mapUsers, filterUsers } from './TeacherService.js';
 import { randomUserMock, additionalUsers } from './FE4U-Lab2-mock.js';
 import { fetchTeachers } from '../network/TeacherNetworkService.js'
 
-//let teachers = mapUsers(randomUserMock, additionalUsers);
+let teachers = mapUsers(randomUserMock, additionalUsers);
 
-// /*
+/*
 
 let teachers = [];
 
@@ -20,7 +20,7 @@ export async function initTeachers() {
     return teachers;
 }
 
-// */
+
 
 export async function setMoreTeachersBy(count) {
     let newTeachers = [];
@@ -34,6 +34,8 @@ export async function setMoreTeachersBy(count) {
     
     teachers = [...teachers, ...newTeachers];
 }
+
+*/
 
 export function getTeachers() {
     return teachers;

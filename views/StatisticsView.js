@@ -54,7 +54,7 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', { year: 'numeric',month: 'short', day: 'numeric'});
 }
 
-const statsMethodDefault = false;
+const statsMethodDefault = true;
 const paginate = (teachers) => {
 
     if (statsMethodDefault) {

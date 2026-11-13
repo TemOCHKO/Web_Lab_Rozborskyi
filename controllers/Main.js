@@ -1,5 +1,5 @@
 import { renderTeachers } from '../views/TeachersView.js';
-import { getTeacherById, getTeachers, getTeachersWithFilters, addTeacher, initTeachers, setMoreTeachersBy } from '../models/teacherRepository.js';
+import { getTeacherById, getTeachers, getTeachersWithFilters, addTeacher } from '../models/teacherRepository.js';
 import { renderPopup, closePopup, renderAddTeacherPopup, closeAddTeacherPopup, handleAddTeacher, toggleTeacherMap, destroyMap } from '../views/PopupView.js';
 import { getFilters, clearFilters } from '../views/filterView.js';
 import { paginate } from '../views/StatisticsView.js';
@@ -8,7 +8,7 @@ import { searchUsers } from '../models/TeacherService.js'
 let currentTeacher = null;
 document.addEventListener('DOMContentLoaded', async () => {
 
-    await initTeachers();
+    // await initTeachers();
 
     renderTeachers(getTeachers());
     paginate(getTeachers());
@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-
+    
+    /*
     const loadMoreBtn = document.querySelector('.load-more-btn');
     if (loadMoreBtn) {
         let isLoading = false;
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             loadMoreBtn.disabled = true;
 
             try {
-                await setMoreTeachersBy(10);
+                // await setMoreTeachersBy(10);
 
                 clearFilters({ silent: true });
 
@@ -91,6 +92,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+    */
+
     // event delegation 
     document.addEventListener('click', (event) => {
         const target = event.target;
