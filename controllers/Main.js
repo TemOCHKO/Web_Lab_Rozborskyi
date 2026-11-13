@@ -1,16 +1,16 @@
 import { renderTeachers } from '../views/TeachersView.js';
-import { getTeacherById, getTeachers, getTeachersWithFilters, addTeacher } from '../models/teacherRepository.js';
+import { getTeacherById, getTeachers, getTeachersWithFilters, addTeacher, getFavoriteTeachers } from '../models/teacherRepository.js';
 import { renderPopup, closePopup, renderAddTeacherPopup, closeAddTeacherPopup, handleAddTeacher, toggleTeacherMap, destroyMap } from '../views/PopupView.js';
 import { getFilters, clearFilters } from '../views/filterView.js';
 import { paginate } from '../views/StatisticsView.js';
 import { searchUsers } from '../models/TeacherService.js'
+import { renderFavorites, shiftFavoritesPage } from '../views/FavoritesView.js';
 
 let currentTeacher = null;
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // await initTeachers();
-
     renderTeachers(getTeachers());
+    renderFavorites(getFavoriteTeachers());
     paginate(getTeachers());
 
     // Static Listeners 
@@ -20,6 +20,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             let teachs = getTeachersWithFilters(getFilters());
             renderTeachers(teachs);
             paginate(teachs);
+        });
+    }
+
+    const toggleStatsContainer = document.querySelector('.toggle-statistics');
+    if (toggleStatsContainer) {
+        toggleStatsContainer.addEventListener('click', () => {
+            toggleStatsMethod();
+            paginate(getTeachersWithFilters(getFilters()));
         });
     }
 
@@ -65,34 +73,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-    
-    /*
-    const loadMoreBtn = document.querySelector('.load-more-btn');
-    if (loadMoreBtn) {
-        let isLoading = false;
 
-        loadMoreBtn.addEventListener('click', async () => {
-            if (isLoading) return;
-            isLoading = true;
-            loadMoreBtn.disabled = true;
+    let lastItemsPerPage = null;
 
-            try {
-                // await setMoreTeachersBy(10);
-
-                clearFilters({ silent: true });
-
-                const teachs = getTeachers();
-                renderTeachers(teachs);
-                paginate(teachs);
-            } catch (error) {
-                console.error('Failed to load additional teachers:', error.message);
-            } finally {
-                isLoading = false;
-                loadMoreBtn.disabled = false;
-            }
-        });
-    }
-    */
+    window.addEventListener('resize', _.debounce(() => {
+        renderFavorites(getTeachers());
+    }, 150));
 
     // event delegation 
     document.addEventListener('click', (event) => {
@@ -105,6 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // open info popup
+        /*
         const teacherCard = target.closest('.teacher-card');
         if (teacherCard && target.closest('.teacher-showcase')) {
             const userId = teacherCard.dataset.userId;
@@ -112,6 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderPopup('infoPopup', currentTeacher);
             return;
         }
+        */
 
         // close info popup 
         if (target.closest('.popup-close') && !target.closest('.add-pop')) {
@@ -158,33 +146,59 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             return;
         }
+
+        if (target.closest('.prev-fav')) {
+            shiftFavoritesPage(-1, getTeachers());
+            return;
+        }
+        if (target.closest('.next-fav')) {
+            shiftFavoritesPage(1, getTeachers());
+            return;
+        }
+
+        const teacherCard = target.closest('.teacher-card');
+        if (teacherCard && (target.closest('.teacher-showcase') || target.closest('.favorites-showcase'))) {
+            const userId = teacherCard.dataset.userId;
+            currentTeacher = getTeacherById(userId);
+            renderPopup('infoPopup', currentTeacher);
+            return;
+        }
     });
 
     // form
-    document.addEventListener('submit', (event) => {
+    document.addEventListener('submit', async (event) => {
         const addTeacherForm = event.target.closest('.add-teacher-container');
         
         if (addTeacherForm) {
             event.preventDefault(); 
-            
-            const validUser = handleAddTeacher(); 
-            
-            if (validUser) {
+        
+        const validUser = handleAddTeacher(); 
+        console.log(validUser);
+        
+        if (validUser) {
+            try {
+                //await saveTeacherToApi(validUser);
+                
                 addTeacher(validUser);
-                renderTeachers(getTeachers());
-                paginate(getTeachers());
+                renderTeachers(getTeachersWithFilters(getFilters()));
+                paginate(getTeachersWithFilters(getFilters()));
                 closeAddTeacherPopup();
+            } catch (error) {
+                console.error('Couldnt save teacher on server: ', error.message);
             }
+        }
         }
     });
 
     function handleModalClose() {
         destroyMap();
         currentTeacher = null;
+
         const needsReRender = closePopup('infoPopup');
         if (needsReRender) {
-            let teachs = getTeachersWithFilters(getFilters());
+            const teachs = getTeachersWithFilters(getFilters());
             renderTeachers(teachs);
+            renderFavorites(getTeachers());
             paginate(teachs);
         }
     }

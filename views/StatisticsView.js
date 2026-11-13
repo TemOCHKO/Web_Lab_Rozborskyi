@@ -270,8 +270,6 @@ function renderTeachersChart(teachers) {
     });
 }
 
-
-
 export {
     paginate
 };

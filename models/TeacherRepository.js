@@ -69,3 +69,7 @@ export function getAllTeachersCountries() {
 export function getAllTeachersSpecialties() {
     return [...new Set(teachers.map(teach => teach.course))];
 }
+
+export function getFavoriteTeachers() {
+    return _.filter(teachers, {favorite: true});
+}
