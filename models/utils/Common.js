@@ -9,7 +9,6 @@ export function getDaysUntilNextBirthday(birthDate) {
     const today = dayjs().startOf('day');
 
     let nextBirthday = today.month(dob.month()).date(dob.date());
-
     if (nextBirthday.isSame(today, 'day')) {
         return 0;
     }
