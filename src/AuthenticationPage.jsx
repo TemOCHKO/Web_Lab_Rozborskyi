@@ -17,7 +17,7 @@ export default function AuthenticationPage() {
 
     if (login.trim() === TRUE_LOGIN && password === TRUE_PASSWORD) {
       setError('');
-      document.cookie = 'isAuth=true; path=/; max-age=3600';
+      document.cookie = 'isAuth=true; path=/; max-age=3600; SameSite=Lax';
       navigate('/weather');
     } else {
       setError('Invalid login or password. Try again.');

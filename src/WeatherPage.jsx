@@ -41,7 +41,7 @@ export default function WeatherPage() {
     }, []);
 
     const handleLogout = () => {
-        document.cookie = 'isAuth=; path=/; max-age=0';
+        document.cookie = 'isAuth=false; path=/; max-age=0; SameSite=Lax';
         navigate('/');
     };
 

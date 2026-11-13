@@ -33,8 +33,7 @@ export default function WeatherCard({ index, date, maxTemp, minTemp, windSpeed, 
         <div className="day-date">{formatDay(date, index)}</div>
 
         <div className="day-condition">
-            <span className="weather-icon">{weather.icon}</span>
-            <span>{weather.label}</span>
+            <span>{weather}</span>
         </div>
 
         <div className="day-temps">
