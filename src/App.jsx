@@ -9,7 +9,7 @@ function isAuthenticated() {
     .some((row) => row.startsWith('isAuth=true'));
 }
 
-function ProtectedRoute({ children }) {
+function DefaultOrAlreadyAuthRoute({ children }) {
   return isAuthenticated() ? children : <Navigate to="/" replace />;
 }
 
@@ -22,9 +22,9 @@ export default function App() {
           }
         />
         <Route path="/weather" element={
-            <ProtectedRoute>
+            <DefaultOrAlreadyAuthRoute>
               <WeatherPage />
-            </ProtectedRoute>
+            </DefaultOrAlreadyAuthRoute>
           }
         />
       </Routes>

@@ -47,12 +47,9 @@ export default function WeatherPage() {
 
     return (
         <div className="weather-page">
-        <div className="top-bar">
-            <span className="brand">WeatherApp</span>
             <button onClick={handleLogout} className="logout-btn">
             Log out
             </button>
-        </div>
 
         <div className="weather-content">
             <h1 className="city-title">
