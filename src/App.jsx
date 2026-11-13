@@ -1,28 +1,33 @@
-import { useState } from 'react';
-import './App.css';
-import backImage from './assets/image.png' 
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import AuthenticationPage from './AuthenticationPage';
+import WeatherPage from './WeatherPage';
 
-export default function AuthPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function isAuthenticated() {
+  return document.cookie
+    .split('; ')
+    .some((row) => row.startsWith('isAuth=true'));
+}
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Trying to log in:', { email, password });
-};
+function ProtectedRoute({ children }) {
+  return isAuthenticated() ? children : <Navigate to="/" replace />;
+}
 
+export default function App() {
   return (
-    <div className="auth-container" 
-    style={{ backgroundImage: `url(${backImage})` }}>
-      <div className="auth-island">
-        <h2>Sign in to Web App</h2>
-        
-        <form onSubmit={handleSubmit} className="auth-form">
-          <input placeholder="Login" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input type="password" placeholder="Password" value={password}onChange={(e) => setPassword(e.target.value)}required />
-          <button type="submit">Sign In</button>
-        </form>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+            isAuthenticated() ? <Navigate to="/weather" replace /> : <AuthenticationPage />
+          }
+        />
+        <Route path="/weather" element={
+            <ProtectedRoute>
+              <WeatherPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
