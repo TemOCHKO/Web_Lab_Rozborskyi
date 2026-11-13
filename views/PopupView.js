@@ -150,17 +150,6 @@ function infiltrateTeacherSpecialtySelector() {
     if (specDatalist) populateDatalistDOM(specDatalist, specialties);
 }
 
-function populateSelectDOM(selectSelector, optionsArray, placeholder = 'Select option...') {
-    const validOptions = optionsArray.filter(item => item !== null && item !== undefined && String(item).trim() !== '');
-
-    const optionsHTML = validOptions.map(item => {
-        const value = String(item).trim();
-        return `<option value="${value}">${value}</option>`;
-    }).join('');
-
-    selectSelector.innerHTML = `<option value="" disabled selected>${placeholder}</option>` + optionsHTML;
-}
-
 function populateDatalistDOM(datalistElement, optionsArray) {
     const validOptions = optionsArray.filter(item => item !== null && item !== undefined && String(item).trim() !== '');
 

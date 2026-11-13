@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (validUser) {
             try {
-                //await saveTeacherToApi(validUser);
+                await saveTeacherToApi(validUser);
                 
                 addTeacher(validUser);
                 renderTeachers(getTeachersWithFilters(getFilters()));

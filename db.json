@@ -389,6 +389,28 @@
       "course": "Brain Surgeon",
       "bg_color": "#8000ff",
       "note": "Hi "
+    },
+    {
+      "gender": "Female",
+      "title": "Mrs",
+      "full_name": "Flis Navidad",
+      "city": "OJiai",
+      "state": null,
+      "country": "Brazil",
+      "postcode": null,
+      "coordinates": null,
+      "timezone": null,
+      "email": "iqhudh@gmail.com",
+      "b_date": "2003-10-12",
+      "age": 23,
+      "phone": "1829833",
+      "picture_large": null,
+      "picture_thumbnail": null,
+      "id": "6REv65a9pD4",
+      "favorite": false,
+      "course": "Physics",
+      "bg_color": "#4400ff",
+      "note": "Im from Braizl\n"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

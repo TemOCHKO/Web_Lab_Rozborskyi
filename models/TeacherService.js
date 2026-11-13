@@ -318,24 +318,24 @@ function doesMatch(user, query) {
         return false;
     }
 
-    const cleanQuery = _.trim(_.toString(query)).toLowerCase();
+    const queryWithoutSpace = _.trim(_.toString(query)).toLowerCase();
     const age = _.get(user, 'age');
-    const num = Number(cleanQuery.slice(1));
+    const num = Number(queryWithoutSpace.slice(1));
 
-    if (!isNaN(Number(cleanQuery)) && Number(cleanQuery) === age) {
+    if (!isNaN(Number(queryWithoutSpace)) && Number(queryWithoutSpace) === age) {
         return true;
     }
 
-    if (_.startsWith(cleanQuery, '<') && !isNaN(num)) {
+    if (_.startsWith(queryWithoutSpace, '<') && !isNaN(num)) {
         return _.lt(age, num);
     }
-    if (_.startsWith(cleanQuery, '>') && !isNaN(num)) {
+    if (_.startsWith(queryWithoutSpace, '>') && !isNaN(num)) {
         return _.gt(age, num);
     }
 
     return _.some(otherAllowedSearchFields, (field) => {
         const value = _.get(user, field);
-        return !_.isNil(value) && _.includes(_.toLower(value), cleanQuery);
+        return !_.isNil(value) && _.includes(_.toLower(value), queryWithoutSpace);
     });
 
 }

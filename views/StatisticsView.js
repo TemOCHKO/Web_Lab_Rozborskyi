@@ -230,8 +230,6 @@ function renderTeachersChart(teachers) {
             break;
     }
 
-    //const { labels, data } = getSpecialtyStatistics(teachers);
-
     if (currentChart) {
         console.log('dstr');
         currentChart.destroy();

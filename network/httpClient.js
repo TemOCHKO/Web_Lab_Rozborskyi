@@ -9,12 +9,12 @@ export async function get(url, customHeaders = {}) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+      throw new Error('http error');
     }
 
     return await response.json();
   } catch (error) {
-    console.error(`GET request failed for ${url}:`, error);
+    console.error('get request error');
     throw error;
   }
 }
