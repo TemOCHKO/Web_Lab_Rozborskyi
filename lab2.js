@@ -1,3 +1,5 @@
+/*
+
 import { randomUserMock, additionalUsers } from './FE4U-Lab2-mock.js';
 
 const courses = [
@@ -17,7 +19,7 @@ function calculateAge(bDayString) {
     const difference = Date.now() - birthDate.getTime();
     const ageDate = new Date(difference);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
-}
+} 
 
 export function mapUsers(randomUserArr, additionalUsersArr) {
     const formattedRandomUsers = randomUserArr.map(user => {
@@ -38,7 +40,7 @@ export function mapUsers(randomUserArr, additionalUsersArr) {
             picture_large: user.picture.large,
             picture_thumbnail: user.picture.thumbnail, 
 
-            id: user.login?.id,
+            id: user.login?.uuid,
             favorite: false, 
             course: pickRandomCourse(),
             bg_color: null, 
@@ -136,6 +138,21 @@ const phoneToCountry = {
   default: /^[\d\s\-+()]{7,20}$/,
 };
 
+const countryToContinent = {
+  'Germany': 'Europe',
+  'Ireland': 'Europe',
+  'Australia': 'Australia',
+  'United States': 'North America',
+  'Finland': 'Europe',
+  'Turkey': 'Europe', 
+  'Switzerland': 'Europe',
+  'France': 'Europe',
+  'Spain': 'Europe',
+  'Norway': 'Europe',
+  'Denmark': 'Europe',
+  'Netherlands': 'Europe'
+};
+
 function validatePhone(phone, country) {
     if (typeof phone !== 'string') {
         return false;
@@ -152,6 +169,10 @@ function validatePhone(phone, country) {
 
 // FILTER
 
+function getContinent(country) {
+  return countryToContinent[country] || 'Unknown';
+}
+
 const allowedFilters = ['age', 'gender', 'favorite', 'country'];
 class FieldFilterCriteria {
     constructor(topic, value) {
@@ -159,19 +180,26 @@ class FieldFilterCriteria {
         this.value = value;
     }
 
-    isValidFilter(subj) {
+    isValidFilter(user) {
         if (this.value === undefined || this.value === null || this.value === '' || !allowedFilters.includes(this.topic)) {
             return true;
         }
 
         if (this.topic === 'age') {
             const [min, max] = this.value.split('-').map(Number);
-            const itemValue = Number(subj[this.topic]);
+            const itemValue = Number(user[this.topic]);
 
             return itemValue >= min && itemValue <= max;
         }
 
-        return subj[this.topic] === this.value;
+        if (this.topic === 'country') {
+            const continent = getContinent(user[this.topic]);
+
+            
+            return this.value === continent;
+        }
+
+        return user[this.topic] === this.value;
     }
 }
 
@@ -303,8 +331,9 @@ export function getUsersSearchPercentage(users, query) {
     return Math.round((userFittingSearch.length / users.length) * 100);
 } 
 
+*/
 
-
+/*
 const arr = mapUsers(randomUserMock, additionalUsers); 
 
 console.log("\n\n\nVALIDATE USER\n");
@@ -315,7 +344,7 @@ for (let i = 0; i < arr.length; i++) {
 }
 
 
-let filteredUsers = filterUsers(arr, {country: 'Spain'});
+let filteredUsers = filterUsers(arr, {country: 'Spain', gender: 'Male'});
 
 console.log("\n\n\nFILTER USERS\n");
 console.log(filteredUsers);
@@ -330,6 +359,8 @@ const searchedUsers = searchUsers(arr, sFilter);
 
 const searchFilter = '<50';
 console.log(searchedUsers);
-console.log("\n\n\nPERCENTAGE OF USERS " + searchFilter + "\n")
+console.log("\n\n\nPERCENTAGE OF USERS " + searchFilter + "%\n")
 console.log(getUsersSearchPercentage(arr, searchFilter));
+
+*/
 
