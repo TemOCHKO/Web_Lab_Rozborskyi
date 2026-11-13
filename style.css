@@ -197,6 +197,7 @@ header {
     text-align: center;
     position: relative; 
     transition: transform 0.2s;
+    user-select: none; 
 }
 
 .star {
@@ -261,6 +262,32 @@ header {
 }
 
 /*Statistics table section*/
+
+.toggle-statistics {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.toggle-statistics button {
+    float: right;
+    border: 1.4px solid #f25b50;
+    background-color: #f25b50;
+    width: 7.5em; 
+    height: 2.5em;
+    font-size: 1em;
+    font-weight: 550;
+    color: white;
+    border-radius: 5%;
+    cursor: pointer;
+    margin-bottom: 0.5em;
+}
+
+.toggle-statistics button:hover {
+    border: 1.4px solid #ffffff;
+}
 
 .choice-group {
     margin-top: 1em;
@@ -386,7 +413,7 @@ header {
 
 .favorites-showcase {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 20px; 
     min-width: 0; 
     overflow-x: auto;
@@ -426,10 +453,22 @@ header {
     cursor: pointer;
     padding: 0;
     margin-bottom: 1.2em;
+    user-select: none; 
 }
 
 .arrow-button:hover {
     color: black;
+}
+
+.arrow-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.empty-favorites {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*Text and footer*/
