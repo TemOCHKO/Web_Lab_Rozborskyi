@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const searchInput = document.querySelector('.site-search');
             if (searchInput) {
                 if (searchInput.value === '' || searchInput.value.trim() === '') {
-                    renderTeachers(getTeachers());
-                    paginate(getTeachers());
+                    renderTeachers(getTeachersWithFilters(getFilters()));
+                    paginate(getTeachersWithFilters(getFilters()));
                 }
                 else {
                     let teachs = searchUsers(getTeachersWithFilters(getFilters()), searchInput.value);
@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         searchInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 if (searchInput.value === '' || searchInput.value.trim() === '') {
-                    renderTeachers(getTeachers());
-                    paginate(getTeachers());
+                    renderTeachers(getTeachersWithFilters(getFilters()));
+                    paginate(getTeachersWithFilters(getFilters()));
                 }
                 else {
                     let teachs = searchUsers(getTeachersWithFilters(getFilters()), searchInput.value);
